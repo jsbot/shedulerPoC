@@ -20,42 +20,42 @@ app.directive('scheduler', function() {
 					description: "first appointment",
 					time: {
 						start: "10:00AM",
-						length: "0.5"
+						length: "t-15"
 					}
 				},{
 					id:1,
 					description: "second appointment",
 					time: {
 						start: "10:00AM",
-						length: "0.5"
+						length: "t-30"
 					}
 				},{
 					id:1,
 					description: "third appointment",
 					time: {
 						start: "10:00AM",
-						length: "0.5"
+						length: "t-15"
 					}
 				},{
 					id:1,
 					description: "bla appointment",
 					time: {
 						start: "11:45AM",
-						length: "0.5"
+						length: "t-15"
 					}
 				},{
 					id:1,
 					description: "new appointment",
 					time: {
 						start: "12:15PM",
-						length: "0.5"
+						length: "t-30"
 					}
 				},{
 					id:1,
 					description: "general appointment",
 					time: {
 						start: "02:45PM",
-						length: "0.5"
+						length: "t-15"
 					}
 				}
 			]
@@ -65,18 +65,41 @@ app.directive('scheduler', function() {
 					description: "123 appointment",
 					time: {
 						start: "11:00AM",
-						length: "0.5"
+						length: "t-15"
 					}
 				},{
 					id:1,
 					description: "Super",
 					time: {
 						start: "11:00AM",
-						length: "0.5"
+						length: "t-30"
 					}
 				}
 			]
+			scope.template = [
+				{
+					id:1,
+					description: "123 appointment",
+					time: {
+						start: "11:00AM",
+						length: "quarter"
+					}
+				}
+			]
+			scope.currentoffset = 0;
+			scope.currentoverlap = 0;
+			scope.handlemousedown = function(p, e){
+				scope.currentoffset = e.target.offsetTop;
+				console.log(e.target.offsetTop)
+				angular.element(e.target).append('<div id="template" style="border:1px solid black; height:50px; width:100%; background: #c3c3c3">temp</div>')
+			}
+			scope.handlemouseup = function(p, e){
+				scope.currentoverlap = e.target.offsetTop;
+				var item = document.getElementById("template");
+				console.log(angular.element(item));
+				angular.element(item).css({"height":(((scope.currentoverlap-scope.currentoffset)%50)*50)+50+"px"});
 
+			}
 			function prepareTimeScale(userAppointments){
 				var scale = [];
 				var startTime  = scope.config.timing.from.substr(0,2);

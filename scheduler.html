@@ -41,8 +41,13 @@
                             <div class="sch-room-timescale">
                                 <div class="sch-timing-hour" ng-repeat="time in timescale2">
 
-                                    <div class="sch-timing-quarter-hour" ng-repeat="child in time.childs">
-                                        <div draggable="true" class="appointment" ng-repeat="appointment in child.appointments">{{appointment.description}}</div>
+                                    <div class="sch-timing-quarter-hour" ng-repeat="child in time.childs"
+                                         ng-mousedown="handlemousedown(p, $event)"
+                                         ng-mouseup="handlemouseup(p, $event)"
+                                        >
+                                        <div draggable="true" ng-class="appointment.time.length" class="appointment" ng-repeat="appointment in child.appointments">
+                                            {{appointment.description}}
+                                        </div>
                                     </div>
 
 
@@ -57,7 +62,9 @@
                                 <div class="sch-timing-hour" ng-repeat="time in timescale">
 
                                     <div class="sch-timing-quarter-hour" ng-repeat="child in time.childs">
-                                       <div class="appointment" ng-repeat="appointment in child.appointments">{{appointment.description}}</div>
+                                       <div class="appointment" ng-class="appointment.time.length" ng-repeat="appointment in child.appointments">
+                                           {{appointment.description}}
+                                       </div>
                                     </div>
 
                                 </div>
