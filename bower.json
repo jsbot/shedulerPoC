@@ -1,0 +1,19 @@
+{
+  "name": "pocScheduler",
+  "version": "0.0.0",
+  "authors": [
+    "den <jsbot0001@gmail.com>"
+  ],
+  "description": "scheduler prototype",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "angular": "~1.3.15"
+  }
+}

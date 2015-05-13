@@ -1,0 +1,70 @@
+.sheduler{
+  border:1px solid black;
+}
+.sch-timescale{
+  display:inline-block;
+  width: 50px;
+  border:1px solid red;
+}
+.sch-rooms-content{
+  display:inline-block;
+  vertical-align: top;
+  width:96.5%;
+}
+.sch-rooms{
+  display:flex;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width:100%;
+  border: 1px solid green;
+}
+.sch-room {
+  width:100%;
+  border:1px solid red;
+}
+.sch-room-data{
+  display:flex;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+.sch-room-header{
+  display:block;
+  height:50px;
+  width:100%;
+  background: lightskyblue;
+
+}
+
+.sch-occupant{
+  display:inline-block;
+  width:100%;
+}
+.sch-occupant-header{
+  height:50px;
+  background: gainsboro;
+  border:1px solid black;
+}
+.sch-timing-hour{
+  border:1px solid #c3c3c3;
+
+}
+.sch-timing-quarter-hour{
+  border-bottom:1px dotted #c3c3c3;
+  height:50px;
+  position:relative;
+  display:flex;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+.sch-timing-quarter-hour:last-child{
+  border-bottom:0px;
+}
+
+.appointment{
+  background: greenyellow;
+width: 100%;
+  border:1px solid black;
+}

@@ -1,0 +1,148 @@
+<div class="sheduler">
+    <div class="sch-header">
+
+    </div>
+    <div class="sch-body">
+        <div class="sch-timescale">
+            <div class="sch-room-header">
+                room header
+            </div>
+
+                <div class="sch-occupant">
+                    <div class="sch-occupant-header">
+                        header
+                    </div>
+                    <div class="sch-room-timescale">
+                        <div class="sch-timing-hour" ng-repeat="time in timescale">
+
+                            <div class="sch-timing-quarter-hour" ng-repeat="child in time.childs">{{child.time}}</div>
+
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+        <div class="sch-rooms-content">
+            <div class="sch-rooms">
+                <!--ROOM-->
+                <div class="sch-room">
+                    <div class="sch-room-header">
+                        room header
+                    </div>
+                    <div class="sch-room-data">
+                        <div class="sch-occupant">
+                            <div class="sch-occupant-header">
+                                header
+                            </div>
+                            <div class="sch-room-timescale">
+                                <div class="sch-timing-hour" ng-repeat="time in timescale2">
+
+                                    <div class="sch-timing-quarter-hour" ng-repeat="child in time.childs">
+                                        <div draggable="true" class="appointment" ng-repeat="appointment in child.appointments">{{appointment.description}}</div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sch-occupant">
+                            <div class="sch-occupant-header">
+                                header
+                            </div>
+                            <div class="sch-room-timescale">
+                                <div class="sch-timing-hour" ng-repeat="time in timescale">
+
+                                    <div class="sch-timing-quarter-hour" ng-repeat="child in time.childs">
+                                       <div class="appointment" ng-repeat="appointment in child.appointments">{{appointment.description}}</div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>                <!--ROOM-->
+                <div class="sch-room">
+                    <div class="sch-room-header">
+                        room header
+                    </div>
+                    <div class="sch-room-data">
+                        <div class="sch-occupant">
+                            <div class="sch-occupant-header">
+                                header
+                            </div>
+                            <div class="sch-room-timescale">
+                                <div class="sch-timing-hour" ng-repeat="time in timescale">
+
+                                    <div class="sch-timing-quarter-hour" ng-repeat="child in time.childs"></div>
+
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+                <!--ROOM-->
+                <div class="sch-room">
+                    <div class="sch-room-header">
+                        room header
+                    </div>
+                    <div class="sch-room-data">
+                        <div class="sch-occupant">
+                            <div class="sch-occupant-header">
+                                header
+                            </div>
+                            <div class="sch-room-timescale">
+                                <div class="sch-timing-hour" ng-repeat="time in timescale">
+
+                                    <div class="sch-timing-quarter-hour" ng-repeat="child in time.childs"></div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sch-occupant">
+                            <div class="sch-occupant-header">
+                                header
+                            </div>
+                            <div class="sch-room-timescale">
+                                <div class="sch-timing-hour" ng-repeat="time in timescale">
+
+                                    <div class="sch-timing-quarter-hour" ng-repeat="child in time.childs">
+                                        text
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sch-occupant">
+                            <div class="sch-occupant-header">
+                                header
+                            </div>
+                            <div class="sch-room-timescale">
+                                <div class="sch-timing-hour" ng-repeat="time in timescale">
+
+                                    <div class="sch-timing-quarter-hour" ng-repeat="child in time.childs">
+                                        text
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
