@@ -2,18 +2,22 @@ var app = angular.module('app',[]);
 app.controller('calendarController', ['$scope', function($scope) {
 
 }]);
-app.directive('scheduler', function() {
+app.directive('scheduler', function($q) {
 	return {
 		restrict: 'E',
 		templateUrl: 'scheduler.html',
 		link: function(scope, element, attr) {
+			scope.timescale = [];
+			scope.timescale2 = [];
 			scope.config = {
-				timing:{
-					from: "09AM",
-					to:"06PM",
-					split: "quarter"
+				timing :{
+					from :"09AM" ,
+					to :"06PM" ,
+					split :"quarter"
 				}
 			}
+
+
 			scope.appointments = [
 				{
 					id:1,
@@ -62,9 +66,23 @@ app.directive('scheduler', function() {
 			scope.appointments2 = [
 				{
 					id:1,
-					description: "123 appointment",
+					description: "BLA appointment",
 					time: {
 						start: "11:00AM",
+						length: "t-15"
+					}
+				},{
+					id:1,
+					description: "just created",
+					time: {
+						start: "12:15PM",
+						length: "t-15"
+					}
+				},{
+					id:1,
+					description: "BLA1 appointment",
+					time: {
+						start: "6:15=-000--00AM",
 						length: "t-15"
 					}
 				},{
@@ -101,6 +119,7 @@ app.directive('scheduler', function() {
 
 			}
 			function prepareTimeScale(userAppointments){
+				var deferred = $q.defer();
 				var scale = [];
 				var startTime  = scope.config.timing.from.substr(0,2);
 				var endTime  = scope.config.timing.to.substr(0,2);
@@ -257,10 +276,70 @@ app.directive('scheduler', function() {
 					}
 				}
 
-				return scale
+				deferred.resolve(scale);
+				return deferred.promise;
 			}
-			scope.timescale =  prepareTimeScale(scope.appointments);
-			scope.timescale2 =  prepareTimeScale(scope.appointments2);
+
+			function promisesQueue(appArray){
+				var defer = $q.defer();
+				var promisesArray =[];
+
+				for(var i = 0; i< appArray.length; i++){
+					var promise =  prepareTimeScale(appArray[i]);
+					promisesArray.push(promise);
+				}
+
+				$q.all(promisesArray).then(function(data){
+					defer.resolve(data);
+				})
+
+				return defer.promise;
+			}
+
+			var roomLoad = promisesQueue([scope.appointments,scope.appointments2, []]);
+			roomLoad.then(function(data){
+				scope.timescale = data[0]; //temp for other columns
+				scope.timescale2 = data[1]; //temp for other columns
+
+				scope.rooms = [
+					{
+						id: 1,
+						header: "room1",
+						doctors: [
+							{
+								id: 11,
+								name: "doctor1",
+								appointments: data[0]
+							},
+							{
+								id: 12,
+								name: "doctor2",
+								appointments: data[1]
+							}
+						]
+					},{
+						id: 2,
+						header: "room2",
+						doctors: [
+							{
+								id: 21,
+								name: "doctor3",
+								appointments: data[2]
+							},{
+								id: 31,
+								name: "denys",
+								appointments: data[0]
+							}
+						]
+					}
+				]
+			})
+
+
+
+
+
+
 
 		}
 	}

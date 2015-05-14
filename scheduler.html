@@ -29,10 +29,44 @@
         <div class="sch-rooms-content">
             <div class="sch-rooms">
                 <!--ROOM-->
+                <div class="sch-room" ng-repeat="room in rooms">
+                    <div class="sch-room-header">
+                        {{room.header}}
+                    </div>
+
+                    <div class="sch-room-data">
+                        <div class="sch-occupant" ng-repeat="doctor in room.doctors">
+                            <div class="sch-occupant-header">
+                                {{doctor.name}}
+                            </div>
+                            <div class="sch-room-timescale">
+
+                                <div class="sch-timing-hour" ng-repeat="time in doctor.appointments">
+
+                                    <div class="sch-timing-quarter-hour" ng-repeat="child in time.childs"
+                                         ng-mousedown="handlemousedown(p, $event)"
+                                         ng-mouseup="handlemouseup(p, $event)"
+                                        >
+                                        <div draggable="true" ng-class="appointment.time.length" class="appointment" ng-repeat="appointment in child.appointments">
+                                            {{appointment.description}}
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+              <!--  &lt;!&ndash;ROOM&ndash;&gt;
                 <div class="sch-room">
                     <div class="sch-room-header">
                         room header
                     </div>
+
                     <div class="sch-room-data">
                         <div class="sch-occupant">
                             <div class="sch-occupant-header">
@@ -73,7 +107,7 @@
                     </div>
 
 
-                </div>                <!--ROOM-->
+                </div>                &lt;!&ndash;ROOM&ndash;&gt;
                 <div class="sch-room">
                     <div class="sch-room-header">
                         room header
@@ -97,7 +131,7 @@
 
 
                 </div>
-                <!--ROOM-->
+                &lt;!&ndash;ROOM&ndash;&gt;
                 <div class="sch-room">
                     <div class="sch-room-header">
                         room header
@@ -147,7 +181,7 @@
                     </div>
 
 
-                </div>
+                </div>-->
             </div>
 
         </div>
