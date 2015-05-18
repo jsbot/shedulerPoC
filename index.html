@@ -14,6 +14,9 @@
 
 <div ng-controller="calendarController">
     <h1>Sheduler</h1>
+    <a  ng-click="addRoom()">add Room</a>
+    <a  ng-click="addAppointments()">add appointments</a>
+    <label>Search: <input ng-model="searchText"></label>
     <scheduler></scheduler>
 
 </div>

@@ -1,6 +1,10 @@
 <div class="sheduler">
     <div class="sch-header">
-
+        <select ng-model="timeSelected" ng-options="time  for time in timeSelectBox">
+        </select>
+        <select ng-model="doctorSelected" ng-options="doctor.name for doctor in doctors">
+        </select>
+        <label>Text: <input ng-model="appointmentTitle"></label>
     </div>
     <div class="sch-body">
         <div class="sch-timescale">
@@ -8,20 +12,18 @@
                 room header
             </div>
 
-                <div class="sch-occupant">
-                    <div class="sch-occupant-header">
-                        header
+            <div class="sch-occupant">
+                <div class="sch-occupant-header">
+                    header
+                </div>
+                <div class="sch-room-timescale">
+                    <div class="sch-timing-hour" ng-repeat="time in timescale">
+
+                        <div class="sch-timing-quarter-hour" ng-repeat="child in time.childs">{{child.time}}</div>
+
+
                     </div>
-                    <div class="sch-room-timescale">
-                        <div class="sch-timing-hour" ng-repeat="time in timescale">
-
-                            <div class="sch-timing-quarter-hour" ng-repeat="child in time.childs">{{child.time}}</div>
-
-
-                        </div>
-                    </div>
-
-
+                </div>
 
 
             </div>
@@ -29,7 +31,7 @@
         <div class="sch-rooms-content">
             <div class="sch-rooms">
                 <!--ROOM-->
-                <div class="sch-room" ng-repeat="room in rooms">
+                <div class="sch-room" ng-repeat="room in rooms ">
                     <div class="sch-room-header">
                         {{room.header}}
                     </div>
@@ -41,13 +43,15 @@
                             </div>
                             <div class="sch-room-timescale">
 
-                                <div class="sch-timing-hour" ng-repeat="time in doctor.appointments">
+                                <div class="sch-timing-hour" ng-repeat="time in doctor.appointments ">
 
-                                    <div class="sch-timing-quarter-hour" ng-repeat="child in time.childs"
-                                         ng-mousedown="handlemousedown(p, $event)"
+                                    <div class="sch-timing-quarter-hour" ng-repeat="child in time.childs " >
+                   <!--                      ng-mousedown="handlemousedown(p, $event)"
                                          ng-mouseup="handlemouseup(p, $event)"
-                                        >
-                                        <div draggable="true" ng-class="appointment.time.length" class="appointment" ng-repeat="appointment in child.appointments">
+                                        >-->
+                                        <!--Cards directive place-->
+                                        <div draggable="true" ng-class="appointment.time.length" class="appointment"
+                                             ng-repeat="appointment in child.appointments | filter:searchText">
                                             {{appointment.description}}
                                         </div>
                                     </div>
@@ -61,127 +65,7 @@
 
 
                 </div>
-              <!--  &lt;!&ndash;ROOM&ndash;&gt;
-                <div class="sch-room">
-                    <div class="sch-room-header">
-                        room header
-                    </div>
 
-                    <div class="sch-room-data">
-                        <div class="sch-occupant">
-                            <div class="sch-occupant-header">
-                                header
-                            </div>
-                            <div class="sch-room-timescale">
-                                <div class="sch-timing-hour" ng-repeat="time in timescale2">
-
-                                    <div class="sch-timing-quarter-hour" ng-repeat="child in time.childs"
-                                         ng-mousedown="handlemousedown(p, $event)"
-                                         ng-mouseup="handlemouseup(p, $event)"
-                                        >
-                                        <div draggable="true" ng-class="appointment.time.length" class="appointment" ng-repeat="appointment in child.appointments">
-                                            {{appointment.description}}
-                                        </div>
-                                    </div>
-
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="sch-occupant">
-                            <div class="sch-occupant-header">
-                                header
-                            </div>
-                            <div class="sch-room-timescale">
-                                <div class="sch-timing-hour" ng-repeat="time in timescale">
-
-                                    <div class="sch-timing-quarter-hour" ng-repeat="child in time.childs">
-                                       <div class="appointment" ng-class="appointment.time.length" ng-repeat="appointment in child.appointments">
-                                           {{appointment.description}}
-                                       </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-                </div>                &lt;!&ndash;ROOM&ndash;&gt;
-                <div class="sch-room">
-                    <div class="sch-room-header">
-                        room header
-                    </div>
-                    <div class="sch-room-data">
-                        <div class="sch-occupant">
-                            <div class="sch-occupant-header">
-                                header
-                            </div>
-                            <div class="sch-room-timescale">
-                                <div class="sch-timing-hour" ng-repeat="time in timescale">
-
-                                    <div class="sch-timing-quarter-hour" ng-repeat="child in time.childs"></div>
-
-
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-
-
-                </div>
-                &lt;!&ndash;ROOM&ndash;&gt;
-                <div class="sch-room">
-                    <div class="sch-room-header">
-                        room header
-                    </div>
-                    <div class="sch-room-data">
-                        <div class="sch-occupant">
-                            <div class="sch-occupant-header">
-                                header
-                            </div>
-                            <div class="sch-room-timescale">
-                                <div class="sch-timing-hour" ng-repeat="time in timescale">
-
-                                    <div class="sch-timing-quarter-hour" ng-repeat="child in time.childs"></div>
-
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="sch-occupant">
-                            <div class="sch-occupant-header">
-                                header
-                            </div>
-                            <div class="sch-room-timescale">
-                                <div class="sch-timing-hour" ng-repeat="time in timescale">
-
-                                    <div class="sch-timing-quarter-hour" ng-repeat="child in time.childs">
-                                        text
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="sch-occupant">
-                            <div class="sch-occupant-header">
-                                header
-                            </div>
-                            <div class="sch-room-timescale">
-                                <div class="sch-timing-hour" ng-repeat="time in timescale">
-
-                                    <div class="sch-timing-quarter-hour" ng-repeat="child in time.childs">
-                                        text
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-                </div>-->
             </div>
 
         </div>

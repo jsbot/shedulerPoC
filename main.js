@@ -12,7 +12,7 @@ app.directive('scheduler', function($q) {
 			scope.config = {
 				timing :{
 					from :"09AM" ,
-					to :"06PM" ,
+					to :"05PM" ,
 					split :"quarter"
 				}
 			}
@@ -39,6 +39,13 @@ app.directive('scheduler', function($q) {
 					time: {
 						start: "10:00AM",
 						length: "t-15"
+					}
+				},{
+					id:1,
+					description: "third appointment",
+					time: {
+						start: "10:15AM",
+						length: "t-30"
 					}
 				},{
 					id:1,
@@ -94,6 +101,7 @@ app.directive('scheduler', function($q) {
 					}
 				}
 			]
+			scope.appointments3 = [];
 			scope.template = [
 				{
 					id:1,
@@ -309,35 +317,106 @@ app.directive('scheduler', function($q) {
 							{
 								id: 11,
 								name: "doctor1",
-								appointments: data[0]
+								appointments: data[0],
+								appointmentsData: scope.appointments
 							},
 							{
 								id: 12,
 								name: "doctor2",
-								appointments: data[1]
+								appointments: data[1],
+								appointmentsData: scope.appointments2
 							}
 						]
-					},{
+					}/*,{
 						id: 2,
 						header: "room2",
 						doctors: [
 							{
 								id: 21,
 								name: "doctor3",
-								appointments: data[2]
-							},{
-								id: 31,
-								name: "denys",
-								appointments: data[0]
+								appointments: data[2],
+								appointmentsData: scope.appointments3
 							}
 						]
-					}
+					}*/
 				]
+			})
+
+
+			scope.addRoom = function(){
+				scope.rooms.push({
+					id: 3,
+					header: "room3",
+					doctors: [
+						{
+							id: 31,
+							name: "doctor4",
+							appointments: [],
+							appointmentsData: []
+						}
+					]
+				})
+			}
+		scope.timeSelected = "";
+		scope.doctorSelected = "";
+		scope.timeSelectBox = [
+			"10:00AM","10:15AM","10:30AM","10:45AM",
+			"11:00AM","11:15AM","11:30AM","11:45AM",
+			"12:00PM","12:15PM","12:30PM","12:45PM"
+		]
+			scope.appointmentTitle = "";
+			scope.doctors = [{name: "doctor1", id: 11},{name: "doctor2", id: 12}, {name: "doctor3", id: 21}, {name: "doctor4", id: 31}];
+
+		scope.addAppointments = function(appData){
+			console.log("time", scope.timeSelected);
+			console.log("doctor", scope.doctorSelected);
+			var appointment = {
+				id:1,
+				description: scope.appointmentTitle,
+				time: {
+					start: scope.timeSelected,
+					length: "t-15"
+				}
+			}
+			var appointmentArray = [];
+
+			for(var i = 0; i<scope.rooms.length; i++){
+				for (var j = 0; j<scope.rooms[i].doctors.length; j++){
+					if (scope.rooms[i].doctors[j].id == scope.doctorSelected.id){
+						console.log("present", scope.rooms[i].doctors[j])
+						appointmentArray = scope.rooms[i].doctors[j].appointmentsData;
+
+					}
+				}
+			}
+			appointmentArray.push(appointment)
+
+			var promise =  prepareTimeScale(appointmentArray);
+			promise.then(function(data){
+
+				//appdata - roomID, doctorID
+
+				appData = {roomID : scope.roomSelected, doctorID : 31}
+				for(var i = 0; i< scope.rooms.length; i++) {
+
+					for (var j = 0 ; j < scope.rooms[i].doctors.length ; j++) {
+						if (scope.rooms[i].doctors[j].id == scope.doctorSelected.id) {
+							scope.rooms[i].doctors[j].appointments = data;
+						}
+						else {
+							console.log("no such doctor");
+						}
+					}
+
+				}
+
+
 			})
 
 
 
 
+		}
 
 
 
