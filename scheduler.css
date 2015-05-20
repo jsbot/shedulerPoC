@@ -65,11 +65,15 @@
 
 .appointment{
   background: greenyellow;
-width: 100%;
+  width: 100%;
   border:1px solid black;
 }
 .appointment.t-15{
   height:50px;
+}.appointment.t-15empty{
+  height:50px;
+  background: none;
+  border:0px;
 }
 .appointment.t-30{
   height:100px;
